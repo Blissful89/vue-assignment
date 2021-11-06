@@ -5,10 +5,10 @@ import Page from '@/client/components/04-templates/Page.vue'
 <template>
   <Page title="Dashboard">
     <template v-slot:header>
-      <div>Header</div>
+      <h2>Watch the busses driving!</h2>
     </template>
     <template v-slot:content>
-      <div style="height: 150vh">Test</div>
+      <div>Test</div>
     </template>
     <template v-slot:footer>
       <div>Footer</div>
