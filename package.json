@@ -2,15 +2,15 @@
   "name": "vue-assignment",
   "version": "1.0.0",
   "description": "![ ](https://imgs.xkcd.com/comics/code_quality_3.png)",
-  "main": "index.js",
+  "main": "dist/app.js",
   "scripts": {
     "serve": "run-p serve:backend serve:frontend",
     "serve:backend": "ts-node src/server/app.ts",
     "serve:frontend": "vue-cli-service serve src/client/app",
-    "build": "run-p build:client",
+    "build": "run-p build:client build:server",
     "build:client": "vue-cli-service build src/client/app --dest dist/client",
-    "build:server": "tsc ./",
-    "start": "ts-node src/server/app.ts"
+    "build:server": "tsc --project tsconfig.build.json",
+    "start": "node dist/server/app.js"
   },
   "author": "Marco van Harten i.c. ViriCiti",
   "license": "ISC",

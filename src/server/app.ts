@@ -10,7 +10,7 @@ const app = express()
 const httpServer = http.createServer(app)
 
 // Initating all middleware for express
-const path = `${process.cwd()}/dist`
+const path = `${process.cwd()}/dist/client`
 if (fs.existsSync(`${path}/index.html`)) {
   app.use(express.static(path))
 
