@@ -4,14 +4,32 @@
   "description": "![ ](https://imgs.xkcd.com/comics/code_quality_3.png)",
   "main": "index.js",
   "scripts": {
-    "start": "node src/server/app.js"
+    "serve": "run-p serve:backend serve:frontend",
+    "serve:backend": "ts-node src/server/app.ts",
+    "serve:frontend": "vue-cli-service serve src/client/app",
+    "build": "vue-cli-service build src/client/app --dest src/server/dist",
+    "start": "ts-node src/server/app.ts"
   },
-  "author": "",
+  "author": "Marco van Harten i.c. ViriCiti",
   "license": "ISC",
+  "dependencies": {
+    "primeflex": "^3.1.0",
+    "primeicons": "^5.0.0",
+    "primevue": "^3.8.2",
+    "vue": "^3.2.21"
+  },
   "devDependencies": {
+    "@types/node": "^16.11.6",
+    "@types/ws": "^8.2.0",
+    "@vue/cli-plugin-typescript": "^5.0.0-beta",
+    "@vue/cli-service": "^5.0.0-beta",
     "csv-parse": "^4.0.1",
-    "express": "^4.16.4",
-    "pug": "^2.0.3",
+    "express": "^4.17.1",
+    "node-sass": "^6.0.1",
+    "npm-run-all": "^4.1.5",
+    "sass-loader": "^12.3.0",
+    "ts-node": "^10.4.0",
+    "typescript": "^4.4.4",
     "ws": "^6.1.2"
   }
 }
