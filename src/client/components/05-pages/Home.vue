@@ -1,0 +1,17 @@
+<script setup lang="ts">
+import Page from '@/client/components/04-templates/Page.vue'
+</script>
+
+<template>
+  <Page title="Home">
+    <template v-slot:header>
+      <h2>Welcome to the application</h2>
+    </template>
+    <template v-slot:content>
+      Nothing to see here. Move along!
+    </template>
+    <template v-slot:footer>
+      <!-- <div>Footer</div> -->
+    </template>
+  </Page>
+</template>

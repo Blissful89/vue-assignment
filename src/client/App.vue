@@ -1,5 +1,8 @@
 <script setup lang="ts">
-const test: string = 'Hello world'
+import Menu from '@/client/components/02-molecules/Menu.vue';
 </script>
 
-<template>{{ test }}</template>
+<template>
+  <Menu />
+  <router-view></router-view>
+</template>
