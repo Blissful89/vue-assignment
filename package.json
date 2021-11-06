@@ -4,14 +4,23 @@
   "description": "![ ](https://imgs.xkcd.com/comics/code_quality_3.png)",
   "main": "index.js",
   "scripts": {
+    "serve": "run-p serve:backend serve:frontend",
+    "serve:backend": "nodemon src/server/app.js",
+    "serve:frontend": "vue-cli-service serve src/client/app",
+    "build": "vue-cli-service build src/client/app --dest src/server/dist",
     "start": "node src/server/app.js"
   },
-  "author": "",
+  "author": "Marco van Harten i.c. ViriCiti",
   "license": "ISC",
+  "dependencies": {
+    "vue": "^3.2.21"
+  },
   "devDependencies": {
+    "@vue/cli-service": "^5.0.0-beta",
     "csv-parse": "^4.0.1",
     "express": "^4.16.4",
-    "pug": "^2.0.3",
+    "nodemon": "^2.0.14",
+    "npm-run-all": "^4.1.5",
     "ws": "^6.1.2"
   }
 }

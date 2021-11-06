@@ -1,6 +1,7 @@
 const express       = require("express")
 const http          = require("http")
 const WebSocket     = require("ws")
+const fs						= require("fs")
 
 // Broadcaster is a class that emit event when a new datapoint arrive
 // This is just an emulation of real life situation where datapoint came in randomly
@@ -12,16 +13,16 @@ const app        = express()
 const httpServer = http.createServer(app)
 
 // Initating all middleware for express
-app
-	.set("views", `${process.cwd()}/src/server/views`)
-	.set("view engine", "pug")
-	.use(express.static(`${process.cwd()}/src/client`))
-
-// Render index.pug from views for root URL
-app
-	.get("/", (req, res) => {
-		res.render("index")
-	})
+const path = `${process.cwd()}/src/server/dist`
+if (fs.existsSync(`${path}/index.html`)) {
+	app
+		.use(express.static(path))
+	
+	app
+		.get("/", (req, res) => {
+			res.render("index")
+		})
+}
 
 // Initiate websocket server with the same server as express
 const wss = new WebSocket.Server({ server: httpServer })
