@@ -3,7 +3,7 @@ import Page from '@/client/components/04-templates/Page.vue'
 </script>
 
 <template>
-  <Page title="Home">
+  <Page title="Dashboard">
     <template v-slot:header>
       <div>Header</div>
     </template>

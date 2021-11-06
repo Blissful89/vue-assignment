@@ -35,7 +35,7 @@ Run the app
 ## The Assignment
 We have provided you with a starter kit that broadcast vehicle data via web socket. You can find the HTTP server on `src/server/app.js`, it's a bare minimum setup containing an express server to serve HTML page and ws server that broadcast raw data. What you need to build is a front end application that should look like below:
 
-![](https://github.com/viriciti/vue-assignment/raw/master/assets/sketch.png)
+![](https://github.com/viriciti/vue-assignment/raw/master/public/assets/sketch.png)
 
 The whole front end application should be build with [Vue.js](https://vuejs.org/), but you're free to choose how it's build and composed. Data that are needed to render all those component is provided via the web socket connection.
 
