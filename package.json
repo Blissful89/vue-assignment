@@ -2,17 +2,20 @@
   "name": "vue-assignment",
   "version": "1.0.0",
   "description": "![ ](https://imgs.xkcd.com/comics/code_quality_3.png)",
-  "main": "index.js",
+  "main": "dist/app.js",
   "scripts": {
-    "serve": "run-p serve:backend serve:frontend",
-    "serve:backend": "ts-node src/server/app.ts",
+    "serve": "run-p serve:server serve:frontend",
+    "serve:server": "ts-node src/server/app.ts",
     "serve:frontend": "vue-cli-service serve src/client/app",
-    "build": "vue-cli-service build src/client/app --dest src/server/dist",
-    "start": "ts-node src/server/app.ts"
+    "build": "run-p build:client build:server",
+    "build:client": "vue-cli-service build src/client/app --dest dist/client",
+    "build:server": "tsc --project tsconfig.build.json",
+    "start": "cross-env NODE_ENV=production node dist/server/app.js"
   },
   "author": "Marco van Harten i.c. ViriCiti",
   "license": "ISC",
   "dependencies": {
+    "config": "^3.3.6",
     "primeflex": "^3.1.0",
     "primeicons": "^5.0.0",
     "primevue": "^3.8.2",
@@ -20,10 +23,12 @@
     "vue-router": "^4.0.0-0"
   },
   "devDependencies": {
+    "@types/config": "^0.0.40",
     "@types/node": "^16.11.6",
     "@types/ws": "^8.2.0",
     "@vue/cli-plugin-typescript": "^5.0.0-beta",
     "@vue/cli-service": "^5.0.0-beta",
+    "cross-env": "^7.0.3",
     "csv-parse": "^4.0.1",
     "express": "^4.17.1",
     "node-sass": "^6.0.1",
