@@ -1,0 +1,9 @@
+// Here are some overwrites for primevue
+.p-menubar {
+  border: none;
+  border-radius: 0;
+}
+
+.p-menubar-root-list {
+  gap: 1rem;
+}
