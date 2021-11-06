@@ -7,7 +7,9 @@
     "serve": "run-p serve:backend serve:frontend",
     "serve:backend": "ts-node src/server/app.ts",
     "serve:frontend": "vue-cli-service serve src/client/app",
-    "build": "vue-cli-service build src/client/app --dest src/server/dist",
+    "build": "run-p build:client",
+    "build:client": "vue-cli-service build src/client/app --dest dist/client",
+    "build:server": "tsc ./",
     "start": "ts-node src/server/app.ts"
   },
   "author": "Marco van Harten i.c. ViriCiti",
