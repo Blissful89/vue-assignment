@@ -13,6 +13,9 @@
   "author": "Marco van Harten i.c. ViriCiti",
   "license": "ISC",
   "dependencies": {
+    "primeflex": "^3.1.0",
+    "primeicons": "^5.0.0",
+    "primevue": "^3.8.2",
     "vue": "^3.2.21"
   },
   "devDependencies": {
