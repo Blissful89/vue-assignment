@@ -11,32 +11,25 @@ defineProps<{ title: string }>()
     <main class="page__content overflow-y-auto">
       <slot name="content"></slot>
     </main>
-    <footer class="page__footer">
-      <slot name="footer"></slot>
-    </footer>
   </div>
 </template>
 
 <style lang="scss">
 .page {
   --page-header-height: 6rem;
-  --page-footer-height: 3rem;
-  --page-content-height: calc(100vh - var(--page-header-height) - var(--page-footer-height) - 62px);
+  --page-content-height: calc(100vh - var(--page-header-height) - 61px);
   --padding: 1rem;
 
   & > * {
     padding: 0 var(--padding);
   }
+
   &__header {
     height: var(--page-header-height);
   }
 
   &__content {
     height: var(--page-content-height);
-  }
-
-  &__footer {
-    height: var(--page-footer-height);
   }
 }
 </style>
