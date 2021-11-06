@@ -1,6 +1,7 @@
 import { createApp } from 'vue'
-import App from './App.vue'
 import PrimeVue from 'primevue/config'
+import router from '@/client/router';
+import App from './App.vue'
 
 import '@/client/styles/styles.scss'
 
@@ -12,4 +13,7 @@ import 'primeflex/primeflex.css';                            //flex
 
 const app = createApp(App)
 
-app.use(PrimeVue).mount('#app')
+app
+  .use(PrimeVue)
+  .use(router)
+  .mount('#app')

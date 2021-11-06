@@ -1,5 +1,7 @@
 <script setup lang="ts">
-const test: string = 'Hello world'
 </script>
 
-<template>{{ test }}</template>
+<template>
+  <div>Menu!!</div>
+  <router-view></router-view>
+</template>
