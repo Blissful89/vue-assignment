@@ -1,3 +1,5 @@
-<script setup></script>
+<script setup lang="ts">
+const test: string = 'Hello world'
+</script>
 
-<template>Hello world</template>
+<template>{{ test }}</template>

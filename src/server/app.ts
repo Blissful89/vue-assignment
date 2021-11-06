@@ -1,13 +1,10 @@
-const express       = require("express")
-const http          = require("http")
-const WebSocket     = require("ws")
-const fs						= require("fs")
+import express from 'express'
+import http from 'http'
+import WebSocket from 'ws'
+import fs from 'fs'
+import Broadcaster from './Broadcaster'
 
-// Broadcaster is a class that emit event when a new datapoint arrive
-// This is just an emulation of real life situation where datapoint came in randomly
-const Broadcaster   = require ("./Broadcaster")
-
-const app        = express()
+const app = express()
 
 // Create own HTTP server instead of using app.listen() in order to share the same port with WS
 const httpServer = http.createServer(app)
@@ -15,13 +12,11 @@ const httpServer = http.createServer(app)
 // Initating all middleware for express
 const path = `${process.cwd()}/src/server/dist`
 if (fs.existsSync(`${path}/index.html`)) {
-	app
-		.use(express.static(path))
-	
-	app
-		.get("/", (req, res) => {
-			res.render("index")
-		})
+  app.use(express.static(path))
+
+  app.get('/', (_, res) => {
+    res.render('index')
+  })
 }
 
 // Initiate websocket server with the same server as express
@@ -32,16 +27,14 @@ const wss = new WebSocket.Server({ server: httpServer })
 const broadcaster = new Broadcaster()
 
 broadcaster.start()
-broadcaster.on("data", (data) => {
-	// Send data to all connected clients on websocket
-	wss.clients.forEach((socket) => {
-		socket.send(JSON.stringify(data))
-	})
+broadcaster.on('data', (data: Vehicles.Data) => {
+  // Send data to all connected clients on websocket
+  wss.clients.forEach((socket) => {
+    socket.send(JSON.stringify(data))
+  })
 })
 
 // Start listening on port 3000 for both express app and WS server
 httpServer.listen(3000, () => {
-	console.log("HTTP server listening on port 3000")
+  console.log('HTTP server listening on port 3000')
 })
-
-
