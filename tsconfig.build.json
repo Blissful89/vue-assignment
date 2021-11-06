@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
+    "baseUrl": ".",
+    "esModuleInterop": true,
+    "jsx": "preserve",
+    "importHelpers": true,
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "paths": { "@/*": ["src/*"] },
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "sourceMap": true,
+    "strict": true,
+    "target": "esnext",
+    "incremental": true,
+    "outDir": "dist/server",
+    "noEmit": false
+  },
+  "files": ["src/server/app.ts"],
+  "include": ["src/server/**/*.ts", "src/types**/*.ts"]
+}

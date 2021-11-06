@@ -3,6 +3,7 @@ import http from 'http'
 import WebSocket from 'ws'
 import fs from 'fs'
 import Broadcaster from './Broadcaster'
+import config from 'config'
 
 const app = express()
 
@@ -10,7 +11,7 @@ const app = express()
 const httpServer = http.createServer(app)
 
 // Initating all middleware for express
-const path = `${process.cwd()}/src/server/dist`
+const path = `${process.cwd()}/dist/client`
 if (fs.existsSync(`${path}/index.html`)) {
   app.use(express.static(path))
 
@@ -35,6 +36,7 @@ broadcaster.on('data', (data: Vehicles.Data) => {
 })
 
 // Start listening on port 3000 for both express app and WS server
-httpServer.listen(3000, () => {
-  console.log('HTTP server listening on port 3000')
+const port = config.get('server.port')
+httpServer.listen(port, () => {
+  console.log(`HTTP server listening on port ${port}`)
 })

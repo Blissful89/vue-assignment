@@ -1,0 +1,6 @@
+{
+  "server" : {
+    "host": "viriciti.com",
+    "port": 8080
+  }
+}
