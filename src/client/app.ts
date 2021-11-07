@@ -1,5 +1,6 @@
 import { createApp } from 'vue'
 import PrimeVue from 'primevue/config'
+import ToastService from 'primevue/toastservice';
 import router from '@/client/router';
 import App from './App.vue'
 
@@ -16,4 +17,5 @@ const app = createApp(App)
 app
   .use(PrimeVue)
   .use(router)
+  .use(ToastService)
   .mount('#app')

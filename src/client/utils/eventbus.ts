@@ -1,7 +1,8 @@
-import mitt from 'mitt';
+import mitt from 'mitt'
 
 type Events = {
-  message: Vehicles.Data;
-};
+  message: Vehicles.Data
+  error: Error
+}
 
-export default mitt<Events>();
+export default mitt<Events>()
