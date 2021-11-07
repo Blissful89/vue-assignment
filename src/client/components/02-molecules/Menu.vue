@@ -1,17 +1,21 @@
 <script setup lang="ts">
-import Menubar from 'primevue/menubar'
 import { ref } from 'vue'
+import Menubar from 'primevue/menubar'
+import useLocales from '@/client/compositions/useLocales'
+import Locale from '../01-atoms/Locale.vue'
+
+const { t } = useLocales()
 
 const items = ref([
   {
-    label: 'Home',
+    label: t('pages.home.title'),
     icon: 'pi pi-home',
     to: {
       name: 'Home',
     },
   },
   {
-    label: 'Dashboard',
+    label: t('pages.dashboard.title'),
     icon: 'pi pi-desktop',
     to: {
       name: 'Dashboard',
@@ -26,7 +30,7 @@ const items = ref([
       <img alt="logo" src="assets/logo.png" height="40" />
     </template>
     <template v-slot:end>
-      <!--  -->
+      <Locale />
     </template>
   </Menubar>
 </template>
