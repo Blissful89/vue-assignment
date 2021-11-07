@@ -2,6 +2,7 @@
 import { ref } from 'vue'
 import Menubar from 'primevue/menubar'
 import useLocales from '@/client/compositions/useLocales'
+import LanguageSelect from '../01-atoms/LanguageSelect.vue'
 
 const { t } = useLocales()
 
@@ -29,7 +30,7 @@ const items = ref([
       <img alt="logo" src="assets/logo.png" height="40" />
     </template>
     <template v-slot:end>
-      <!--  -->
+      <LanguageSelect />
     </template>
   </Menubar>
 </template>
