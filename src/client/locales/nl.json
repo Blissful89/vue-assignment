@@ -1,0 +1,17 @@
+{
+  "messages": {
+    "error": {
+      "general": "Er is een fout opgetreden"
+    },
+    "pages": {
+      "home": {
+        "title": "Home",
+        "subtitle": "Welkom in deze applicatie"
+      },
+      "dashboard": {
+        "title": "Dashboard",
+        "subtitle": "Kijk de bussen rijden!"
+      }
+    }
+  }
+}
