@@ -2,6 +2,7 @@ import { createApp } from 'vue'
 import PrimeVue from 'primevue/config'
 import ToastService from 'primevue/toastservice';
 import router from '@/client/router';
+import i18n from '@/client/plugins/i18n';
 import App from './App.vue'
 
 // Note: Doing this for faster development
@@ -18,4 +19,5 @@ app
   .use(PrimeVue)
   .use(router)
   .use(ToastService)
+  .use(i18n)
   .mount('#app')

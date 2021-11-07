@@ -1,17 +1,20 @@
 <script setup lang="ts">
-import Menubar from 'primevue/menubar'
 import { ref } from 'vue'
+import Menubar from 'primevue/menubar'
+import useLocales from '@/client/compositions/useLocales'
+
+const { t } = useLocales()
 
 const items = ref([
   {
-    label: 'Home',
+    label: t('pages.home.title'),
     icon: 'pi pi-home',
     to: {
       name: 'Home',
     },
   },
   {
-    label: 'Dashboard',
+    label: t('pages.dashboard.title'),
     icon: 'pi pi-desktop',
     to: {
       name: 'Dashboard',
