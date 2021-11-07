@@ -17,11 +17,11 @@ defineProps<{ title: string }>()
 <style lang="scss">
 .page {
   --page-header-height: 6rem;
-  --page-content-height: calc(100vh - var(--page-header-height) - 61px);
-  --padding: 1rem;
+  --page-content-height: calc(100vh - var(--page-header-height) * 2);
+  --distance: 1rem;
 
   & > * {
-    padding: 0 var(--padding);
+    padding: 0 var(--distance);
   }
 
   &__header {
@@ -30,6 +30,7 @@ defineProps<{ title: string }>()
 
   &__content {
     height: var(--page-content-height);
+    margin: var(--distance) 0;
   }
 }
 </style>
