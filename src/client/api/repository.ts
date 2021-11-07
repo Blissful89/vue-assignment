@@ -1,14 +1,28 @@
-const URL = 'ws://localhost:3000'
+import { ref } from 'vue'
+import eventbus from '@/client/utils/eventbus'
 
+const URL = 'ws://localhost:3000'
+const DELAY = 2000
+
+/**
+ * This repository opens the connection for vehicle data.
+ * It fakes a loading state to mimic real delay
+ */
 class Repository {
   socket?: WebSocket
+  loading = ref(false)
 
-  open(cb?: any) {
-    this.socket = new WebSocket(URL)
-    this.socket.onopen = cb
+  openWebsocket(cb?: any) {
+    this.loading.value = true
+    setTimeout(() => {
+      this.socket = new WebSocket(URL)
+      this.socket.onopen = cb
+      this.socket.onmessage = (e: any) => eventbus.emit('message', e)
+      this.loading.value = false
+    }, DELAY)
   }
 
-  close(cb?: any) {
+  closeWebsocket(cb?: any) {
     if (this.socket) {
       this.socket.onclose = cb
       this.socket.close()
@@ -16,17 +30,9 @@ class Repository {
     }
   }
 
-  onmessage(cb?: any) {
-    if (!this.socket) {
-      this.socket = new WebSocket(URL)
-    }
-
-    this.socket.onmessage = cb;
-  }
-
   isOpen() {
-    return Boolean(this.socket);
+    return Boolean(this.socket)
   }
 }
 
-export default new Repository();
+export default new Repository()
