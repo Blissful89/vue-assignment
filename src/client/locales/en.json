@@ -1,0 +1,17 @@
+{
+  "messages": {
+    "error": {
+      "general": "Something went wrong"
+    },
+    "pages": {
+      "home": {
+        "title": "Home",
+        "subtitle": "Welcome to the application"
+      },
+      "dashboard": {
+        "title": "Dashboard",
+        "subtitle": "Watch the busses go!"
+      }
+    }
+  }
+}
