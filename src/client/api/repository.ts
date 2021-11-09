@@ -16,7 +16,7 @@ class Repository {
     setTimeout(() => {
       this.socket = new WebSocket(this.url)
       this.socket.onopen = cb
-      this.socket.onmessage = (e: any) => eventbus.emit('message', e)
+      this.socket.onmessage = (e: any) => eventbus.emit('message', JSON.parse(e.data))
       this.socket.onerror = () =>
         eventbus.emit('error', new Error('A connection was not established'))
       this.loading.value = false

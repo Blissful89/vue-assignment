@@ -2,7 +2,7 @@
 import { ref } from 'vue'
 import Menubar from 'primevue/menubar'
 import useLocales from '@/client/compositions/useLocales'
-import Locale from '../01-atoms/Locale.vue'
+import Locale from '@/client/components/01-atoms/Locale.vue';
 
 const { t } = useLocales()
 
