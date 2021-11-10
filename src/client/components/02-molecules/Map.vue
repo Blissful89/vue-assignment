@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, ref } from 'vue'
+import { computed, onMounted, ref, watch, unref } from 'vue'
 import Point from 'ol/geom/Point'
 import View from 'ol/View'
 import Map from 'ol/Map'
@@ -10,50 +10,71 @@ import VectorLayer from 'ol/layer/Vector'
 import VectorSource from 'ol/source/Vector'
 import OSM from 'ol/source/OSM'
 import Feature from 'ol/Feature'
+import { easeOut } from 'ol/easing'
+import { fromLonLat } from 'ol/proj'
 import eventbus from '@/client/utils/eventbus'
+import repository from '@/client/api/repository'
 import 'ol/ol.css'
 
+// EPSG:3857
+// EPSG:4326
 const tileUrl = 'http://{a-c}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png'
 const map = ref('map')
-const startCoords = [4.895168, 52.370216]
+const utrecht = [52.08921432495117, 5.106114864349365]
 
-const transform = ([lat, long]: number[]) => {
-  const point = new Point([long, lat])
-  point.transform('EPSG:4326', 'EPSG:900913')
-  return point
-}
+const transform3857 = ([lat, long]: number[]) => fromLonLat([long, lat])
+const toPoint = ([long, lat]: number[]) => new Point([long, lat])
 
-const icon = new Icon({ src: '../../assets/bus.svg', scale: 0.8 })
+const icon = new Icon({ src: 'assets/bus.svg', scale: 0.8 })
 const style = new Style({ image: icon })
-const geometry = transform(startCoords)
+const geometry = toPoint(transform3857(utrecht))
 const feature = new Feature(geometry)
 feature.setStyle(style)
 
 const iconSource = new VectorSource({ features: [feature] })
 const iconLayer = new VectorLayer({ source: iconSource })
-const tileLayer = new TileLayer({
-  source: new OSM({ url: tileUrl }),
+const tileLayer = new TileLayer({ source: new OSM({ url: tileUrl }) })
+const view = new View({ zoom: 0, center: [0, 0] })
+
+const PREP_TIME = 2000
+const isLoading = repository.loading
+const isReady = ref(false)
+
+watch(isLoading, () => {
+  if (!unref(isLoading)) {
+    console.log('done with loading')
+
+    new Map({
+      target: map.value,
+      layers: [tileLayer, iconLayer],
+      view,
+    })
+
+    view.animate({
+      center: transform3857(utrecht),
+      zoom: 15,
+      duration: PREP_TIME,
+      easing: easeOut,
+    })
+
+    setTimeout(() => {
+      isReady.value = true
+    }, PREP_TIME)
+  }
 })
 
-const view = new View({ zoom: 15, center: geometry.getCoordinates() })
-
-onMounted(() => {
-  new Map({
-    target: map.value,
-    layers: [tileLayer, iconLayer],
-    view,
+// TODO: Stop on interaction + button for toggle
+watch(isReady, () => {
+  eventbus.on('message', (event) => {
+    const coords = transform3857(event.gps.split('|').map((coordStr) => Number(coordStr)))
+    view.setCenter(coords)
+    geometry.setCoordinates(coords, { duration: 5000 })
   })
-})
-
-eventbus.on('message', (event) => {
-  const coords = event.gps.split('|').map((coordStr) => Number(coordStr))
-  view.setCenter(transform(coords).getCoordinates());
-  feature.setGeometry(transform(coords))
 })
 </script>
 
 <template>
-  <div class="w-full h-full" ref="map" />
+  <div :class="isLoading ? 'skeleton' : ''" class="w-full h-full" ref="map" />
 </template>
 
 <style lang="scss">
