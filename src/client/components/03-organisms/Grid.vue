@@ -1,13 +1,27 @@
 <script setup lang="ts">
+import { ref, unref } from 'vue'
+import ToggleButton from 'primevue/togglebutton'
 import Map from '@/client/components/02-molecules/Map.vue'
 import Card from '@/client/components/01-atoms/Card.vue'
+import repository from '@/client/api/repository'
+
+const mapLocked = ref(true)
 </script>
 
 <template>
   <div class="grid-container h-full w-full">
     <div class="grid-map">
       <Card :title="$t('pages.dashboard.map')">
-        <Map />
+        <template v-slot:header>
+          <ToggleButton
+            v-if="!unref(repository.loading)"
+            v-model="mapLocked"
+            onIcon="pi pi-lock"
+            offIcon="pi pi-lock-open"
+            class="p-button-secondary p-button-rounded"
+          />
+        </template>
+        <Map :locked="mapLocked" />
       </Card>
     </div>
     <div class="grid-speed">
