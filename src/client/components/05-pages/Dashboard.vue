@@ -4,8 +4,7 @@ import repository from '@/client/api/repository'
 import useLocales from '@/client/compositions/useLocales'
 import { onMounted, onUnmounted } from 'vue'
 
-import Grid from '@/client/components/04-templates/Grid.vue'
-import Map from '@/client/components/02-molecules/Map.vue'
+import Grid from '@/client/components/03-organisms/Grid.vue'
 
 const { t } = useLocales()
 
@@ -19,14 +18,7 @@ onUnmounted(() => repository.closeWebsocket())
       <h2>{{ t('pages.dashboard.subtitle') }}</h2>
     </template>
     <template v-slot:content>
-      <Grid>
-        <template v-slot:map>
-          <Map />
-        </template>
-        <template v-slot:bars> Bars </template>
-        <template v-slot:speedProfile> Speed Profile </template>
-        <template v-slot:stateOfCharge> State of Charge </template>
-      </Grid>
+      <Grid />
     </template>
   </Page>
 </template>

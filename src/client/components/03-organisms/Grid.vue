@@ -1,16 +1,23 @@
+<script setup lang="ts">
+import Map from '@/client/components/02-molecules/Map.vue'
+import Card from '@/client/components/01-atoms/Card.vue'
+</script>
+
 <template>
   <div class="grid-container h-full w-full">
-    <div class="grid-element-1">
-      <slot name="map" />
+    <div class="grid-map">
+      <Card title="Map">
+        <Map />
+      </Card>
     </div>
     <div class="grid-element-2">
-      <slot name="bars" />
+      Bars
     </div>
     <div class="grid-element-3">
-      <slot name="speedProfile" />
+      Speed Profile
     </div>
     <div class="grid-element-4">
-      <slot name="stateOfCharge" />
+      State of Charge
     </div>
   </div>
 </template>
@@ -20,7 +27,11 @@
   display: grid;
   gap: 1rem;
 
-  grid-template-rows: 50vh repeat(3, 22vh);
+  grid-template-rows: 30vh repeat(3, 22vh);
+
+  @media screen and (min-width: $bp-small) {
+    grid-template-rows: 50vh repeat(3, 22vh);
+  }
 
   @media screen and (min-width: $bp-largest) {
     --size: 40vh;
@@ -28,7 +39,7 @@
     grid-template-columns: repeat(2, var(--size)) repeat(2, 1fr);
     grid-template-rows: var(--size);
 
-    .grid-element-1 {
+    .grid-map {
       grid-column: span 2;
     }
     .grid-element-2 {
@@ -41,9 +52,5 @@
       grid-column: 1 / -1;
     }
   }
-}
-
-.ol-attribution {
-  display: none !important;
 }
 </style>
