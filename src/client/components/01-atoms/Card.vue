@@ -5,10 +5,12 @@ defineProps<{ title?: string }>()
 <template>
   <div class="card h-full w-full">
     <div v-if="title || $slots.header" class="card__header">
-      <h3 v-if="title">{{ title }}</h3>
+      <h3 class="select-none" v-if="title">{{ title }}</h3>
       <slot name="header" />
     </div>
-    <slot name="default" />
+    <div class="card__content w-full h-full">
+      <slot name="default" />
+    </div>
   </div>
 </template>
 
@@ -17,6 +19,10 @@ defineProps<{ title?: string }>()
   --distance: 1rem;
   position: relative;
   padding-top: var(--distance);
+
+  &__content {
+    box-shadow: 0px 2px 10px 0px rgba(0,0,0,0.1);
+  }
 
   &__header {
     position: absolute;

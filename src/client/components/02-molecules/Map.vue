@@ -40,8 +40,6 @@ const isReady = ref(false)
 
 watch(isLoading, () => {
   if (!unref(isLoading)) {
-    console.log('done with loading')
-
     new Map({
       target: map.value,
       layers: [tileLayer, iconLayer],
