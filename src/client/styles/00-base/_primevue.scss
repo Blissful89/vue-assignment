@@ -7,3 +7,10 @@
 .p-menubar-root-list {
   gap: 1rem;
 }
+
+.p-highlight {
+  background-color: var(--primary-color) !important;
+  > * {
+    color: white !important;
+  }
+}
