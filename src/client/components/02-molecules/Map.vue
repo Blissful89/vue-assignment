@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { computed, onMounted, ref, watch, unref } from 'vue'
+import { ref, watch, unref, defineProps } from 'vue'
+import { Interaction, MouseWheelZoom, DragPan, DragZoom, DragRotateAndZoom } from 'ol/interaction'
 import Point from 'ol/geom/Point'
 import View from 'ol/View'
 import Map from 'ol/Map'
@@ -12,65 +13,85 @@ import OSM from 'ol/source/OSM'
 import Feature from 'ol/Feature'
 import { easeOut } from 'ol/easing'
 import { fromLonLat } from 'ol/proj'
+import Collection from 'ol/Collection'
 import eventbus from '@/client/utils/eventbus'
 import repository from '@/client/api/repository'
 import 'ol/ol.css'
 
-const tileUrl = 'http://{a-c}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png'
-const map = ref('map')
-const utrecht = [52.08921432495117, 5.106114864349365]
+const UTRECHT = [52.08921432495117, 5.106114864349365]
+const ANIM_DURATION = 2000
+const DEFAULT_ZOOM = 15
 
-const transform3857 = ([lat, long]: number[]) => fromLonLat([long, lat])
+const props = defineProps<{ locked: boolean }>()
+
+const tileUrl = 'http://{a-c}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png'
+const mapRef = ref('mapRef')
+
+const dragPan = new DragPan()
+const dragZoom = new DragZoom()
+const dragRotateAndZoom = new DragRotateAndZoom()
+const mouseWheelZoom = new MouseWheelZoom()
+
+const interactionsArray = [dragPan, dragZoom, dragRotateAndZoom, mouseWheelZoom]
+const interactions = new Collection<Interaction>([...interactionsArray])
+const map = new Map({ interactions })
+
+const transform = ([lat, long]: number[]) => fromLonLat([long, lat])
 const toPoint = ([long, lat]: number[]) => new Point([long, lat])
+const setInteractability = () =>
+  interactionsArray.forEach((interaction) =>
+    props.locked ? map.removeInteraction(interaction) : map.addInteraction(interaction),
+  )
 
 const icon = new Icon({ src: 'assets/bus.svg', scale: 0.8 })
 const style = new Style({ image: icon })
-const geometry = toPoint(transform3857(utrecht))
+const geometry = toPoint(transform(UTRECHT))
 const feature = new Feature(geometry)
-feature.setStyle(style)
 
 const iconSource = new VectorSource({ features: [feature] })
 const iconLayer = new VectorLayer({ source: iconSource })
 const tileLayer = new TileLayer({ source: new OSM({ url: tileUrl }) })
 const view = new View({ zoom: 0, center: [0, 0] })
 
-const PREP_TIME = 2000
 const isLoading = repository.loading
 const isReady = ref(false)
 
 watch(isLoading, () => {
   if (!unref(isLoading)) {
-    new Map({
-      target: map.value,
-      layers: [tileLayer, iconLayer],
-      view,
-    })
+    feature.setStyle(style)
+    map.setLayers([tileLayer, iconLayer])
+    map.setTarget(mapRef.value)
+    map.setView(view)
 
     view.animate({
-      center: transform3857(utrecht),
-      zoom: 15,
-      duration: PREP_TIME,
+      center: transform(UTRECHT),
+      zoom: DEFAULT_ZOOM,
+      duration: ANIM_DURATION,
       easing: easeOut,
     })
 
     setTimeout(() => {
       isReady.value = true
-    }, PREP_TIME)
+    }, ANIM_DURATION)
   }
 })
 
-// TODO: Stop on interaction + button for toggle
 watch(isReady, () => {
   eventbus.on('message', (event) => {
-    const coords = transform3857(event.gps.split('|').map((coordStr) => Number(coordStr)))
-    view.setCenter(coords)
-    geometry.setCoordinates(coords, { duration: 5000 })
+    const coords = transform(event.gps.split('|').map((coordStr) => Number(coordStr)))
+    if (props.locked) {
+      view.setCenter(coords)
+      view.animate({ zoom: DEFAULT_ZOOM, duration: 100, easing: easeOut })
+    }
+    geometry.setCoordinates(coords)
   })
 })
+
+watch(props, setInteractability, { immediate: true })
 </script>
 
 <template>
-  <div :class="isLoading ? 'skeleton' : ''" class="w-full h-full" ref="map" />
+  <div :class="isLoading ? 'skeleton' : ''" class="w-full h-full" ref="mapRef" />
 </template>
 
 <style lang="scss">
