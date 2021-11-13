@@ -10,7 +10,11 @@
       },
       "dashboard": {
         "title": "Dashboard",
-        "subtitle": "Kijk de bussen rijden!"
+        "subtitle": "Kijk de bussen rijden!",
+        "map": "Kaart",
+        "speed": "Snelheden",
+        "profile": "Profiel",
+        "soc": "Batterij Niveau"
       }
     }
   }
