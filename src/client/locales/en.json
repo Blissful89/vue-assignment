@@ -10,7 +10,11 @@
       },
       "dashboard": {
         "title": "Dashboard",
-        "subtitle": "Watch the busses go!"
+        "subtitle": "Watch the busses go!",
+        "map": "Map",
+        "speed": "Speeds",
+        "profile": "Profile",
+        "soc": "State of Charge"
       }
     }
   }

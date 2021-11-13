@@ -16,8 +16,6 @@ import eventbus from '@/client/utils/eventbus'
 import repository from '@/client/api/repository'
 import 'ol/ol.css'
 
-// EPSG:3857
-// EPSG:4326
 const tileUrl = 'http://{a-c}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png'
 const map = ref('map')
 const utrecht = [52.08921432495117, 5.106114864349365]
@@ -42,8 +40,6 @@ const isReady = ref(false)
 
 watch(isLoading, () => {
   if (!unref(isLoading)) {
-    console.log('done with loading')
-
     new Map({
       target: map.value,
       layers: [tileLayer, iconLayer],
@@ -80,5 +76,9 @@ watch(isReady, () => {
 <style lang="scss">
 .ol-zoom {
   display: none;
+}
+
+.ol-attribution {
+  display: none !important;
 }
 </style>
