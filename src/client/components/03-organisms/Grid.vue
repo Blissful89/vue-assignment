@@ -2,6 +2,7 @@
 import { ref, unref } from 'vue'
 import ToggleButton from 'primevue/togglebutton'
 import Map from '@/client/components/02-molecules/Map.vue'
+import Bars from '@/client/components/02-molecules/Bars.vue'
 import Card from '@/client/components/01-atoms/Card.vue'
 import repository from '@/client/api/repository'
 
@@ -24,8 +25,10 @@ const mapLocked = ref(true)
         <Map :locked="mapLocked" />
       </Card>
     </div>
-    <div class="grid-speed">
-      <Card :title="$t('pages.dashboard.speed')"> </Card>
+    <div class="grid-info">
+      <Card :title="$t('pages.dashboard.info')">
+        <Bars />
+      </Card>
     </div>
     <div class="grid-speed-profile">
       <Card :title="$t('pages.dashboard.profile')"> </Card>
@@ -57,7 +60,7 @@ const mapLocked = ref(true)
     .grid-map {
       grid-column: span 2;
     }
-    .grid-speed {
+    .grid-info {
       grid-column: 3 / -1;
     }
     .grid-speed-profile {
