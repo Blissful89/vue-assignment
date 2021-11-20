@@ -4,7 +4,6 @@ import fs from 'fs'
 import { Writable } from 'stream'
 import History from './history/history'
 import validate from './validation/validate'
-import isEqual from 'lodash/isEqual'
 
 export default class Broadcaster extends EventEmitter {
   broadcasting: boolean
