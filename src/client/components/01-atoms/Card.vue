@@ -1,5 +1,5 @@
 <script setup lang="ts">
-defineProps<{ title?: string }>()
+defineProps<{ title?: string; loading?: boolean; overlap?: boolean }>()
 </script>
 
 <template>
@@ -7,26 +7,37 @@ defineProps<{ title?: string }>()
     <template v-if="title || $slots.header">
       <h3 class="card__title select-none" v-if="title">{{ title }}</h3>
       <div class="card__header">
-        <slot name="header" />
+        <slot v-if="!loading" name="header" />
       </div>
     </template>
-    <div class="card__content w-full h-full">
+    <div :class="overlap && 'card__content--overlap'" class="card__content w-full h-full">
       <slot name="default" />
+      <div v-if="loading" class="skeleton"></div>
     </div>
   </div>
 </template>
 
 <style lang="scss">
 .card {
-  --distance: 1rem;
+  --distance: 0.6rem;
   --border-radius: 3px;
   position: relative;
   padding-top: var(--distance);
 
+  @media screen and (min-width: $bp-small) {
+    --distance: 1rem;
+  }
+
   &__content {
+    position: relative;
     border-radius: var(--border-radius);
+    padding-top: calc(var(--distance) * 2);
     overflow: hidden;
     box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.1);
+
+    &--overlap {
+      padding-top: 0;
+    }
   }
 
   &__title {

@@ -7,15 +7,15 @@ import Card from '@/client/components/01-atoms/Card.vue'
 import repository from '@/client/api/repository'
 
 const mapLocked = ref(true)
+const isLoading = repository.loading
 </script>
 
 <template>
   <div class="grid-container h-full w-full">
     <div class="grid-map">
-      <Card :title="$t('pages.dashboard.map')">
+      <Card :title="$t('pages.dashboard.map')" :loading="isLoading" overlap>
         <template v-slot:header>
           <ToggleButton
-            v-if="!unref(repository.loading)"
             v-model="mapLocked"
             onIcon="pi pi-lock"
             offIcon="pi pi-lock-open"
@@ -26,22 +26,22 @@ const mapLocked = ref(true)
       </Card>
     </div>
     <div class="grid-info">
-      <Card :title="$t('pages.dashboard.info')">
+      <Card :title="$t('pages.dashboard.info')" :loading="isLoading">
         <Bars />
       </Card>
     </div>
     <div class="grid-speed-profile">
-      <Card :title="$t('pages.dashboard.profile')"> </Card>
+      <Card :title="$t('pages.dashboard.profile')"  :loading="isLoading"> </Card>
     </div>
     <div class="grid-soc">
-      <Card :title="$t('pages.dashboard.soc')"> </Card>
+      <Card :title="$t('pages.dashboard.soc')"  :loading="isLoading"> </Card>
     </div>
   </div>
 </template>
 
 <style lang="scss">
 .grid-container {
-  --repeat-small: repeat(3, 25vh);
+  --repeat-small: 1fr repeat(2, 25vh);
   display: grid;
   gap: 1rem;
 
