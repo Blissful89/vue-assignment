@@ -16,6 +16,7 @@
   "license": "ISC",
   "dependencies": {
     "config": "^3.3.6",
+    "lodash": "^4.17.21",
     "mitt": "^3.0.0",
     "ol": "^6.9.0",
     "primeflex": "^3.1.0",
@@ -29,6 +30,7 @@
   },
   "devDependencies": {
     "@types/config": "^0.0.40",
+    "@types/lodash": "^4.14.177",
     "@types/node": "^16.11.6",
     "@types/ws": "^8.2.0",
     "@vue/cli-plugin-typescript": "^5.0.0-beta",
