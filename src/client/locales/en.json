@@ -12,9 +12,10 @@
         "title": "Dashboard",
         "subtitle": "Watch the busses go!",
         "map": "Map",
-        "speed": "Speeds",
+        "info": "General Info",
         "profile": "Profile",
-        "soc": "State of Charge"
+        "soc": "State of Charge",
+        "speed": "Speed"
       }
     }
   }

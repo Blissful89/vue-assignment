@@ -2,13 +2,17 @@ import { EventEmitter } from 'events'
 import csvParse from 'csv-parse'
 import fs from 'fs'
 import { Writable } from 'stream'
+import History from './history/history'
+import validate from './validation/validate'
 
 export default class Broadcaster extends EventEmitter {
   broadcasting: boolean
+  history: History
 
   constructor() {
     super()
     this.broadcasting = false
+    this.history = new History()
   }
 
   start() {
@@ -26,14 +30,20 @@ export default class Broadcaster extends EventEmitter {
             objectMode: true,
             write: (obj: Vehicles.Data, enc: any, cb: any) => {
               if (!this.broadcasting) return cb()
-
-              // setTimeout in this case is there to emulate real life situation
-              // data that came out of the vehicle came in with irregular interval
-              // Hence the Math.random() on the second parameter
-              setTimeout(() => {
-                this.emit('data', obj)
+              // console.log(obj);
+              const data = validate(obj, this.history)
+              if (data) {
+                // setTimeout in this case is there to emulate real life situation
+                // data that came out of the vehicle came in with irregular interval
+                // Hence the Math.random() on the second parameter
+                setTimeout(() => {
+                  this.emit('data', data)
+                  this.history.add(data)
+                  cb()
+                }, Math.ceil(Math.random() * 150))
+              } else {
                 cb()
-              }, Math.ceil(Math.random() * 150))
+              }
             },
           }),
         )
