@@ -13,7 +13,7 @@ const isLoading = repository.loading
 <template>
   <div class="grid-container h-full w-full">
     <div class="grid-map">
-      <Card :title="$t('pages.dashboard.map')" :loading="isLoading" overlap>
+      <Card :title="$t('pages.dashboard.map')" :loading="isLoading" :overlap="true">
         <template v-slot:header>
           <ToggleButton
             v-model="mapLocked"
