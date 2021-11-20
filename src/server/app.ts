@@ -13,11 +13,11 @@ const httpServer = http.createServer(app)
 // Initating all middleware for express
 const path = `${process.cwd()}/dist/client`
 if (fs.existsSync(`${path}/index.html`)) {
-  app.use(express.static(path))
-
-  app.get('/', (_, res) => {
-    res.render('index')
-  })
+  app
+    .use(express.static(path))
+    .get('/', (_, res) => {
+      res.render('index')
+    })
 }
 
 // Initiate websocket server with the same server as express
