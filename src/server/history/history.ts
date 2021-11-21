@@ -10,7 +10,6 @@ export default class History {
 
   add(data: Vehicles.Data) {
     this.items.push(data)
-
     if(this.items.length > MAX_ITEMS) {
       this.items.shift()
     }

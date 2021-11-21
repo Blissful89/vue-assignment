@@ -9,10 +9,10 @@ export default class Broadcaster extends EventEmitter {
   broadcasting: boolean
   history: History
 
-  constructor() {
+  constructor(history: History) {
     super()
     this.broadcasting = false
-    this.history = new History()
+    this.history = history;
   }
 
   start() {
@@ -22,20 +22,14 @@ export default class Broadcaster extends EventEmitter {
       const fileStream = fs.createReadStream('./meta/route.csv')
 
       fileStream
-        // Filestream piped to csvParse which accept nodejs readablestreams and parses each line to a JSON object
         .pipe(csvParse({ delimiter: ',', columns: true, cast: true }))
-        // Then it is piped to a writable streams that will push it into nats
         .pipe(
           new Writable({
             objectMode: true,
             write: (obj: Vehicles.Data, enc: any, cb: any) => {
               if (!this.broadcasting) return cb()
-              // console.log(obj);
               const data = validate(obj, this.history)
               if (data) {
-                // setTimeout in this case is there to emulate real life situation
-                // data that came out of the vehicle came in with irregular interval
-                // Hence the Math.random() on the second parameter
                 setTimeout(() => {
                   this.emit('data', data)
                   this.history.add(data)
