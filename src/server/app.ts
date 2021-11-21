@@ -4,6 +4,7 @@ import WebSocket from 'ws'
 import fs from 'fs'
 import Broadcaster from './Broadcaster'
 import config from 'config'
+import history from 'connect-history-api-fallback'
 
 const app = express()
 
@@ -12,11 +13,13 @@ const httpServer = http.createServer(app)
 
 // Initating all middleware for express
 const path = `${process.cwd()}/dist/client`
-if (fs.existsSync(`${path}/index.html`)) {
+const index = `${path}/index.html`
+if (fs.existsSync(index)) {
   app
     .use(express.static(path))
-    .get('/', (_, res) => {
-      res.render('index')
+    .use(history())
+    .get('*', (_, res) => {
+      res.sendFile(index)
     })
 }
 

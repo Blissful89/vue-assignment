@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import { ref, unref } from 'vue'
+import { ref, defineAsyncComponent } from 'vue'
 import ToggleButton from 'primevue/togglebutton'
-import Map from '@/client/components/02-molecules/Map.vue'
 import Bars from '@/client/components/02-molecules/Bars.vue'
 import Card from '@/client/components/01-atoms/Card.vue'
 import repository from '@/client/api/repository'
 
+const Map = defineAsyncComponent(() => import('@/client/components/02-molecules/Map.vue'))
 const mapLocked = ref(true)
 const isLoading = repository.loading
 </script>
