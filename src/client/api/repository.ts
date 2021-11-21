@@ -20,7 +20,7 @@ class Repository {
       this.socket.onerror = () =>
         eventbus.emit('error', new Error('A connection was not established'))
       this.loading.value = false
-    }, 2000)
+    }, 1000)
   }
 
   closeWebsocket(cb?: any) {

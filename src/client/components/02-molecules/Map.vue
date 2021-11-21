@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, watch, defineProps, onMounted } from 'vue'
+import { ref, watch, onMounted } from 'vue'
 import { Interaction, MouseWheelZoom, DragPan, DragZoom, DragRotateAndZoom } from 'ol/interaction'
 import Point from 'ol/geom/Point'
 import View from 'ol/View'
