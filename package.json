@@ -16,6 +16,7 @@
   "license": "ISC",
   "dependencies": {
     "config": "^3.3.6",
+    "connect-history-api-fallback": "^1.6.0",
     "lodash": "^4.17.21",
     "mitt": "^3.0.0",
     "ol": "^6.9.0",
