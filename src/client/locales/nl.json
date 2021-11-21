@@ -15,8 +15,14 @@
         "info": "Informatie",
         "profile": "Profiel",
         "soc": "Batterij Niveau",
-        "speed": "Snelheid"
+        "speed": "Snelheid",
+        "energy": "Energie",
+        "odo": "Kilometerteller"
       }
+    },
+    "general": {
+      "speed": "km/h",
+      "distance": "km"
     }
   }
 }

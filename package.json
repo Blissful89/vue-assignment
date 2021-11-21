@@ -4,7 +4,7 @@
   "description": "![ ](https://imgs.xkcd.com/comics/code_quality_3.png)",
   "main": "dist/app.js",
   "scripts": {
-    "serve": "run-p serve:server serve:frontend",
+    "serve": "run-p serve:server serve:client",
     "serve:client": "vue-cli-service serve src/client/app",
     "serve:server": "ts-node src/server/app.ts",
     "build": "run-p build:client build:server",

@@ -15,8 +15,14 @@
         "info": "General Info",
         "profile": "Profile",
         "soc": "State of Charge",
-        "speed": "Speed"
+        "speed": "Speed",
+        "energy": "Energy",
+        "odo": "Odometer"
       }
+    },
+    "general": {
+      "speed": "mph",
+      "distance": "mi."
     }
   }
 }
