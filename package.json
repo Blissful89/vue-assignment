@@ -5,8 +5,8 @@
   "main": "dist/app.js",
   "scripts": {
     "serve": "run-p serve:server serve:frontend",
+    "serve:client": "vue-cli-service serve src/client/app",
     "serve:server": "ts-node src/server/app.ts",
-    "serve:frontend": "vue-cli-service serve src/client/app",
     "build": "run-p build:client build:server",
     "build:client": "vue-cli-service build src/client/app --dest dist/client",
     "build:server": "tsc --project tsconfig.build.json",
