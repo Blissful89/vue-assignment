@@ -19,7 +19,7 @@ const loadHistory = () =>
   })
 
 onMounted(loadHistory)
-const id = setInterval(loadHistory, 5000)
+const id = setInterval(loadHistory, 10_000)
 onUnmounted(() => clearInterval(id))
 </script>
 
@@ -44,12 +44,12 @@ onUnmounted(() => clearInterval(id))
       </Card>
     </div>
     <div class="grid-speed-profile">
-      <Card :title="$t('pages.dashboard.profile')" :loading="isLoading">
-        <LineChart id="speedHistogram" key="speed" :data="history" />
+      <Card :title="$t('pages.dashboard.profile')" :loading="isLoading" :overlap="true">
+        <LineChart id="speedHistogram" :data="history" />
       </Card>
     </div>
     <div class="grid-soc">
-      <Card :title="$t('pages.dashboard.soc')" :loading="isLoading"> </Card>
+      <Card :title="$t('pages.dashboard.soc')" :loading="isLoading"> test </Card>
     </div>
   </div>
 </template>
@@ -61,16 +61,17 @@ onUnmounted(() => clearInterval(id))
   gap: 1rem;
 
   grid-template-rows: 30vh var(--repeat-small);
+  grid-template-columns: 100%;
 
   @media screen and (min-width: $bp-small) {
     grid-template-rows: 50vh var(--repeat-small);
   }
 
   @media screen and (min-width: $bp-larger) {
-    --size: 40vh;
+    --size: 30vh;
 
     grid-template-columns: repeat(2, var(--size)) repeat(2, 1fr);
-    grid-template-rows: var(--size);
+    grid-template-rows: var(--size) repeat(2, 1fr);
 
     .grid-map {
       grid-column: span 2;

@@ -17,7 +17,7 @@ const broadcaster = new Broadcaster(history)
 
 app.use(cors())
 app.get('/api/history', (_, res) =>
-  res.send(history.items.map((item) => ({ speed: item.speed, soc: item.soc, time: item.time }))),
+  res.send(history.getHistory()),
 )
 
 const path = `${process.cwd()}/dist/client`

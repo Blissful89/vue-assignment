@@ -1,28 +1,49 @@
 <script setup lang="ts">
-import { onMounted } from 'vue'
+import { onMounted, watch } from 'vue'
 import { Chart, ChartTypeRegistry, registerables } from 'chart.js'
 
 const props = defineProps<{
   id: string
   data: Vehicles.HistoryData[]
-  key: keyof Omit<Vehicles.HistoryData, 'time'>
 }>()
 
-const labels = ['January', 'February', 'March', 'April', 'May', 'June']
+const setPoints = (chart: Chart, items: Vehicles.HistoryData[], set = 0) => {
+  chart.data.labels = []
+  chart.data.datasets[0].data = []
+  items.forEach((item) => {
+    chart.data.labels?.push(item.time)
+    chart.data.datasets[set].data.push(item.speed)
+  })
+  chart.update()
+}
+
 const data = {
-  labels: labels,
+  labels: [],
   datasets: [
     {
-      label: 'My First dataset',
-      backgroundColor: 'rgb(255, 99, 132)',
-      borderColor: 'rgb(255, 99, 132)',
-      data: [0, 10, 5, 2, 20, 30, 45],
+      data: [],
+      fill: false,
+      borderColor: '#7BA563',
+      tension: 0.1,
     },
   ],
 }
 
 const options = {
-  responsive: true,
+  maintainAspectRatio: false,
+  scales: {
+    x: {
+      display: false,
+    },
+    y: {
+      // display: false,
+    },
+  },
+  plugins: {
+    legend: {
+      display: false,
+    },
+  },
 }
 
 const config = {
@@ -31,13 +52,27 @@ const config = {
   options,
 }
 
+let chart: Chart
 onMounted(() => {
-  const element = document.getElementById(props.id) as HTMLCanvasElement
+  const ctx = document.getElementById(props.id) as HTMLCanvasElement
+
   Chart.register(...registerables)
-  new Chart(element, config)
+  chart = new Chart(ctx, config as any)
+})
+
+watch(props, () => {
+  if (chart) {
+    setPoints(chart, props.data)
+  }
 })
 </script>
 
 <template>
-  <canvas class="w-full h-full" :id="id" />
+  <canvas class="line-chart" style="height: 100%; width: 100%" :id="id" />
 </template>
+
+<style lang="scss">
+.line-chart {
+  /* background-color: var(--surface-50); */
+}
+</style>
