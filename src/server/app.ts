@@ -2,9 +2,9 @@ import express from 'express'
 import http from 'http'
 import WebSocket from 'ws'
 import fs from 'fs'
-import Broadcaster from './Broadcaster'
-import config from 'config'
 import history from 'connect-history-api-fallback'
+import config from 'config'
+import Broadcaster from './Broadcaster'
 
 const app = express()
 
