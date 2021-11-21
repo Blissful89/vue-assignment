@@ -5,8 +5,8 @@ withDefaults(defineProps<{ value: number; title?: string; label?: string }>(), {
 </script>
 
 <template>
-  <div class="progress-bar">
-    <h4 class="progress-bar__title">{{ title }}</h4>
+  <div class="flex flex-column gap-3">
+    <h4>{{ title }}</h4>
     <ProgressBar :value="value">
       {{ value }} {{ label }}
     </ProgressBar>
@@ -14,11 +14,17 @@ withDefaults(defineProps<{ value: number; title?: string; label?: string }>(), {
 </template>
 
 <style lang="scss">
-.progress-bar {
-  --distance: 1rem;
-  display: flex;
-  flex-direction: column;
-  padding: var(--distance);
-  gap: var(--distance);
+.p-progressbar {
+  height: 2.4rem;
+
+  &-label {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .p-progressbar-value {
+    background: var(--primary-color);
+  }
 }
 </style>

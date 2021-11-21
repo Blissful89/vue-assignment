@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, defineAsyncComponent } from 'vue'
 import ToggleButton from 'primevue/togglebutton'
-import Bars from '@/client/components/02-molecules/Bars.vue'
+import Info from '@/client/components/02-molecules/Info.vue'
 import Card from '@/client/components/01-atoms/Card.vue'
 import repository from '@/client/api/repository'
 
@@ -27,7 +27,7 @@ const isLoading = repository.loading
     </div>
     <div class="grid-info">
       <Card :title="$t('pages.dashboard.info')" :loading="isLoading">
-        <Bars />
+        <Info />
       </Card>
     </div>
     <div class="grid-speed-profile">
@@ -51,7 +51,7 @@ const isLoading = repository.loading
     grid-template-rows: 50vh var(--repeat-small);
   }
 
-  @media screen and (min-width: $bp-largest) {
+  @media screen and (min-width: $bp-larger) {
     --size: 40vh;
 
     grid-template-columns: repeat(2, var(--size)) repeat(2, 1fr);
