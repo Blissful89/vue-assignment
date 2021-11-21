@@ -1,13 +1,26 @@
 <script setup lang="ts">
-import { ref, defineAsyncComponent } from 'vue'
+import { ref, defineAsyncComponent, onMounted, onUnmounted } from 'vue'
 import ToggleButton from 'primevue/togglebutton'
-import Info from '@/client/components/02-molecules/Info.vue'
-import Card from '@/client/components/01-atoms/Card.vue'
 import repository from '@/client/api/repository'
+import Info from '@/client/components/02-molecules/Info.vue'
+import LineChart from '@/client/components/02-molecules/LineChart.vue'
+import Card from '@/client/components/01-atoms/Card.vue'
 
 const Map = defineAsyncComponent(() => import('@/client/components/02-molecules/Map.vue'))
 const mapLocked = ref(true)
 const isLoading = repository.loading
+const history = ref<Vehicles.HistoryData[]>([])
+
+const loadHistory = () =>
+  repository.loadHistory().then((result) => {
+    if (Array.isArray(result)) {
+      history.value = result
+    }
+  })
+
+onMounted(loadHistory)
+const id = setInterval(loadHistory, 5000)
+onUnmounted(() => clearInterval(id))
 </script>
 
 <template>
@@ -31,10 +44,12 @@ const isLoading = repository.loading
       </Card>
     </div>
     <div class="grid-speed-profile">
-      <Card :title="$t('pages.dashboard.profile')"  :loading="isLoading"> </Card>
+      <Card :title="$t('pages.dashboard.profile')" :loading="isLoading">
+        <LineChart id="speedHistogram" key="speed" :data="history" />
+      </Card>
     </div>
     <div class="grid-soc">
-      <Card :title="$t('pages.dashboard.soc')"  :loading="isLoading"> </Card>
+      <Card :title="$t('pages.dashboard.soc')" :loading="isLoading"> </Card>
     </div>
   </div>
 </template>
