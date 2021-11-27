@@ -13,8 +13,8 @@
         "subtitle": "Kijk de bussen rijden!",
         "map": "Kaart",
         "info": "Informatie",
-        "profile": "Profiel",
-        "soc": "Batterij Niveau",
+        "profile": "Snelheidsprofiel",
+        "soc": "Batterijniveau",
         "speed": "Snelheid",
         "energy": "Energie",
         "odo": "Kilometerteller"

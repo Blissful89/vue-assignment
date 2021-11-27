@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useStore } from 'vuex'
-import { RootState } from '@/client/store/state'
 import Dropdown from 'primevue/dropdown'
+import { RootState } from '@/client/store/state'
 
 const store = useStore<RootState>()
 

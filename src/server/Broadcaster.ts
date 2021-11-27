@@ -12,7 +12,7 @@ export default class Broadcaster extends EventEmitter {
   constructor(history: History) {
     super()
     this.broadcasting = false
-    this.history = history;
+    this.history = history
   }
 
   start() {

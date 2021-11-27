@@ -5,7 +5,7 @@ import get from 'lodash/get'
 import eventbus from '@/client/utils/eventbus'
 import uselocales from '@/client/compositions/useLocales'
 
-const MAX_ITEMS = 500
+const MAX_ITEMS = 1000
 const UPDATE_START_1 = 1500
 const UPDATE_START_2 = 5000
 const UPDATE_INTERVAL = 10_000
@@ -13,19 +13,26 @@ const UPDATE_INTERVAL = 10_000
 const props = defineProps<{ id: string; itemKey: keyof Vehicles.Data }>()
 const { t, locale } = uselocales()
 
-const getLabel = (value: any) => {
-  const parsedValue = get(value, 'formattedValue') ?? value
-
-  const isMetric = locale.value !== 'en'
-  const isSpeed = props.itemKey === 'speed'
-  const resultValue = isMetric || !isSpeed ? parsedValue : Math.round(parsedValue / 1.6)
-
+const generateLabel = (number: number) => {
   switch (props.itemKey) {
     case 'speed':
-      return `${resultValue} ${t('general.speed')}`
+      return `${number.toFixed(0)} ${t('general.speed')}`
+    case 'soc':
+      return `${number.toFixed(1)} ${t('general.percentage')}`
     default:
-      return `${resultValue}`
+      return `${number}`
   }
+}
+
+const getLabel = (value: any) => {
+  const isMetricSpeed = locale.value !== 'en' && props.itemKey === 'speed'
+  const formattedValue = get(value, 'formattedValue')
+  if (formattedValue) {
+    const number = parseFloat(formattedValue)
+    return generateLabel(isMetricSpeed ? number : number / 1.6)
+  }
+
+  return generateLabel(isMetricSpeed ? value : value / 1.6)
 }
 
 const getTooltipTitle = (value: any) => {
@@ -48,7 +55,7 @@ const addPoint = (chart: Chart, item: Vehicles.Data) => {
 
 const data = {
   labels: [],
-  datasets: [{ data: [], fill: false, borderColor: '#7BA563', tension: 0.5 }],
+  datasets: [{ data: [], fill: false, borderColor: '#7BA563', tension: 0.4 }],
 }
 
 const options = {
@@ -90,9 +97,3 @@ watch(locale, () => {
 <template>
   <canvas class="line-chart" style="height: 100%; width: 100%" :id="id" />
 </template>
-
-<style lang="scss">
-.line-chart {
-  /* background-color: var(--surface-50); */
-}
-</style>

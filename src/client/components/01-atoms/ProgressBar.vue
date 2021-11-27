@@ -7,9 +7,7 @@ withDefaults(defineProps<{ value: number; title?: string; label?: string }>(), {
 <template>
   <div class="flex flex-column gap-1">
     <h4>{{ title }}</h4>
-    <ProgressBar :value="value">
-      {{ value }} {{ label }}
-    </ProgressBar>
+    <ProgressBar :value="value"> {{ value }} {{ label }} </ProgressBar>
   </div>
 </template>
 

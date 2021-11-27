@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, defineAsyncComponent, onMounted, onUnmounted } from 'vue'
+import { ref, defineAsyncComponent } from 'vue'
 import ToggleButton from 'primevue/togglebutton'
 import repository from '@/client/api/repository'
 import Info from '@/client/components/02-molecules/Info.vue'
@@ -33,11 +33,13 @@ const isLoading = repository.loading
     </div>
     <div class="grid-speed-profile">
       <Card :title="$t('pages.dashboard.profile')" :loading="isLoading">
-        <LineChart id="speedHistogram" itemKey="speed" />
+        <LineChart id="speedProfile" itemKey="speed" />
       </Card>
     </div>
     <div class="grid-soc">
-      <Card :title="$t('pages.dashboard.soc')" :loading="isLoading"> test </Card>
+      <Card :title="$t('pages.dashboard.soc')" :loading="isLoading">
+        <LineChart id="socProfile" itemKey="soc" />
+      </Card>
     </div>
   </div>
 </template>

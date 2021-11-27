@@ -1,5 +1,3 @@
-import isEmpty from 'lodash/isEmpty'
-
 const MAX_ITEMS = 10
 
 export default class History {
