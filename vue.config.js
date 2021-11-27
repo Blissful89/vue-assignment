@@ -14,7 +14,7 @@ module.exports = {
   },
   chainWebpack: (config) => {
     config.performance
-      .maxEntrypointSize(1_250_000)
+      .maxEntrypointSize(2_000_000)
       .maxAssetSize(300_000)
     config.plugin('html').tap((args) => {
       args[0].title = 'ViriCiti Demo Application'
