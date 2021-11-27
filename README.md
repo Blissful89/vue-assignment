@@ -1,4 +1,12 @@
 
+# Setup
+- install dependencies (npm install)
+## Production
+- npm run build / yarn build
+- npm run start / yarn start
+## Development
+- npm run serve / yarn serve
+
 # ViriCiti Vue Assignment
 ---
 ![](https://imgs.xkcd.com/comics/self_description.png)
