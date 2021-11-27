@@ -13,10 +13,17 @@
         "subtitle": "Watch the busses go!",
         "map": "Map",
         "info": "General Info",
-        "profile": "Profile",
-        "soc": "State of Charge",
-        "speed": "Speed"
+        "profile": "Speed Profile",
+        "soc": "State of Charge Profile",
+        "speed": "Speed",
+        "energy": "Energy",
+        "odo": "Odometer"
       }
+    },
+    "general": {
+      "speed": "mph",
+      "distance": "mi.",
+      "percentage": "%"
     }
   }
 }

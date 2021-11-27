@@ -4,12 +4,15 @@ defineProps<{ title: string }>()
 
 <template>
   <div class="page flex flex-column">
-    <header class="page__header flex flex-column justify-content-center">
-      <h1 class="mb-0">{{ title }}</h1>
-      <slot name="header"></slot>
+    <header class="page__header flex align-items-center justify-content-between">
+      <div>
+        <h1 class="mb-0">{{ title }}</h1>
+        <slot name="header" />
+      </div>
+      <slot name="header:end" />
     </header>
     <main class="page__content overflow-y-auto">
-      <slot name="content"></slot>
+      <slot name="content" />
     </main>
   </div>
 </template>
