@@ -22,7 +22,8 @@
     },
     "general": {
       "speed": "mph",
-      "distance": "mi."
+      "distance": "mi.",
+      "percentage": "%"
     }
   }
 }

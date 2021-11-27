@@ -1,4 +1,5 @@
 <script setup lang="ts">
+
 defineProps<{ title?: string; loading?: boolean; overlap?: boolean }>()
 </script>
 

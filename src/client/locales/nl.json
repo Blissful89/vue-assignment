@@ -22,7 +22,8 @@
     },
     "general": {
       "speed": "km/h",
-      "distance": "km"
+      "distance": "km",
+      "percentage": "%"
     }
   }
 }

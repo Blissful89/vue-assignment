@@ -9,18 +9,6 @@ import Card from '@/client/components/01-atoms/Card.vue'
 const Map = defineAsyncComponent(() => import('@/client/components/02-molecules/Map.vue'))
 const mapLocked = ref(true)
 const isLoading = repository.loading
-const history = ref<Vehicles.HistoryData[]>([])
-
-const loadHistory = () =>
-  repository.loadHistory().then((result) => {
-    if (Array.isArray(result)) {
-      history.value = result
-    }
-  })
-
-onMounted(loadHistory)
-const id = setInterval(loadHistory, 10_000)
-onUnmounted(() => clearInterval(id))
 </script>
 
 <template>
@@ -44,8 +32,8 @@ onUnmounted(() => clearInterval(id))
       </Card>
     </div>
     <div class="grid-speed-profile">
-      <Card :title="$t('pages.dashboard.profile')" :loading="isLoading" :overlap="true">
-        <LineChart id="speedHistogram" :data="history" />
+      <Card :title="$t('pages.dashboard.profile')" :loading="isLoading">
+        <LineChart id="speedHistogram" itemKey="speed" />
       </Card>
     </div>
     <div class="grid-soc">
@@ -68,16 +56,14 @@ onUnmounted(() => clearInterval(id))
   }
 
   @media screen and (min-width: $bp-larger) {
-    --size: 30vh;
-
-    grid-template-columns: repeat(2, var(--size)) repeat(2, 1fr);
-    grid-template-rows: var(--size) repeat(2, 1fr);
+    grid-template-columns: 40vw 1fr;
+    grid-template-rows: 20rem repeat(2, 1fr);
 
     .grid-map {
-      grid-column: span 2;
+      grid-column: span 1;
     }
     .grid-info {
-      grid-column: 3 / -1;
+      grid-column: 2 / -1;
     }
     .grid-speed-profile {
       grid-column: 1 / -1;

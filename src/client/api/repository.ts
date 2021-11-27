@@ -7,7 +7,6 @@ import config from '@/client/utils/config'
  * It fakes a loading state to mimic real delay
  */
 class Repository {
-  private apiUrl = `http://${config.server.host}:${config.server.port}`
   private websocketUrl = `ws://${config.server.host}:${config.server.port}`
   socket?: WebSocket
   loading = ref(false)
@@ -34,12 +33,6 @@ class Repository {
 
   isOpen() {
     return Boolean(this.socket)
-  }
-
-  loadHistory(): Promise<Vehicles.HistoryData[]> {
-    return fetch(`${this.apiUrl}/api/history`)
-      .then((res) => res.json())
-      .catch(() => eventbus.emit('error', new Error('History was not retrieved')))
   }
 }
 

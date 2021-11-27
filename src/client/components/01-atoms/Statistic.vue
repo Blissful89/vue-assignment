@@ -3,9 +3,9 @@ defineProps<{ value: number; title?: string; label?: string }>()
 </script>
 
 <template>
-  <div class="flex flex-column gap-3">
+  <div class="flex flex-column gap-1">
     <h4 v-if="title">{{ title }}</h4>
-    <div class="statistic gap-3">
+    <div class="statistic gap-1">
       <p>{{ value }}</p>
       <span v-if="label">{{ label }}</span>
     </div>

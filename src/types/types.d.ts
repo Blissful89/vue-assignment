@@ -7,5 +7,4 @@ declare namespace Vehicles {
     speed: number
     soc: number
   }
-  export type HistoryData = Pick<Data, 'speed' | 'soc' | 'time'>
 }

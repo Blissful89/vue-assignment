@@ -2,7 +2,6 @@ import express from 'express'
 import http from 'http'
 import WebSocket from 'ws'
 import fs from 'fs'
-import cors from 'cors'
 import historyApiFallback from 'connect-history-api-fallback'
 import config from 'config'
 import Broadcaster from './Broadcaster'
@@ -14,11 +13,6 @@ const httpServer = http.createServer(app)
 
 const history = new History()
 const broadcaster = new Broadcaster(history)
-
-app.use(cors())
-app.get('/api/history', (_, res) =>
-  res.send(history.getHistory()),
-)
 
 const path = `${process.cwd()}/dist/client`
 const index = `${path}/index.html`
