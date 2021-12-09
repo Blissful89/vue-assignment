@@ -14,7 +14,8 @@
         "map": "Kaart",
         "info": "Informatie",
         "profile": "Snelheidsprofiel",
-        "soc": "Batterijniveauprofiel",
+        "soc": "Batterijniveau",
+        "socProfile": "Batterijniveauprofiel",
         "speed": "Snelheid",
         "energy": "Energie",
         "odo": "Kilometerteller"

@@ -14,7 +14,8 @@
         "map": "Map",
         "info": "General Info",
         "profile": "Speed Profile",
-        "soc": "State of Charge Profile",
+        "soc": "State of Charge",
+        "socProfile": "State of Charge Profile",
         "speed": "Speed",
         "energy": "Energy",
         "odo": "Odometer"

@@ -37,7 +37,7 @@ const isLoading = repository.loading
       </Card>
     </div>
     <div class="grid-soc">
-      <Card :title="$t('pages.dashboard.soc')" :loading="isLoading">
+      <Card :title="$t('pages.dashboard.socProfile')" :loading="isLoading">
         <LineChart id="socProfile" itemKey="soc" />
       </Card>
     </div>
